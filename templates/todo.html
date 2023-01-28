@@ -1,0 +1,50 @@
+{% extends "home.html" %}
+
+{% block todo_container %}
+<main class="container">
+    <hr>
+
+    <section class="container-fluid">
+        <form method="post">
+            <div class="col-auto">
+                <div class="input-group mb-3">
+                    <input aria-describedby="button-addon2" aria-label="Add a task" class="form-control" name="task"
+                           placeholder="Enter your task" type="text"
+                           value="{{ task }}"/>
+                    <button class="btn btn-outline-primary" data-mdb-ripple-color="dark" id="button-addon2"
+                            type="submit">
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+
+    {% if todo %}
+    <article class="card container-fluid">
+        <br/>
+        <h4>Todo ID: {{ todo.id }} </h4>
+        <p>
+            <strong>
+                Task: {{ todo.task }}
+            </strong>
+        </p>
+    </article>
+    {% else %}
+    <section class="container-fluid">
+        <h2 align="center">Todos</h2>
+        <br>
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                {% for todo in todos %}
+                <li class="list-group-task">
+                    {{ loop.index }}. <a href="/todo/{{ loop.index }}"> {{ todo.task }} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
